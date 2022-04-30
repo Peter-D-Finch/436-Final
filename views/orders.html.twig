@@ -1,0 +1,61 @@
+{# orders.html.twig
+
+	This file provides the template for displaying the order information for a specific 
+	customer.  It receives the information from index.php and creates a table for the
+	customers pending orders (undelivered) and a table for the customers delivered orders.
+	If either of these lists is empty, a message is displayed instead.
+#}
+
+{% include 'header.twig' %}
+<style>
+	table, tr, th, td { border: 1px solid black !important; }
+	td, th {padding: .4em;}
+		.id { text-align: center; }
+		.name { text-align: center; }
+		.price { text-align: right; }
+</style>
+
+<h1>Orders</h1>
+
+{% if pending %}
+<h3>Your Friends List:</h3>
+	<table>
+		<tr>
+		<th class="tnum">Toy</th>
+		<th class="name">Date Ordered</th>
+		</tr>
+	{% for collection in pending %}
+		<tr>
+		{#<td class="name"><a href="/toystore/collection/{{ collection.tnum }}">{{collection.name}}</a></td>
+		<td class="ordered">{{ collection.date_ordered }}</td>
+		</tr>#}
+	{% endfor %}
+	</table>
+{% else %}
+	<h3>No Friends In Friend List</h3>
+{% endif %}
+
+<br><br>
+{% if delivered %}
+<h3>Your Game Colection:</h3>
+	<table>
+		<tr>
+		<th class="tnum">Game</th>
+		<th class="name">Release Date</th>
+		<th class="name">Reviews</th>
+		<th class="name">URL</th>
+		</tr>
+	{% for item in delivered %}
+		<tr>
+		<td class="name"><a href="/toystore/collection/{{ collection.game_ID }}">{{collection.name}}</a></td>
+		<td class="ordered">{{ collection.release_date }}</td>
+		<td class="ordered">{{ collection.reviews }}</td>
+		<td class="ordered">{{ collection.URL }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<h3>No Games In Your Collection</h3>
+{% endif %}
+
+{% include 'footer.twig' %}
